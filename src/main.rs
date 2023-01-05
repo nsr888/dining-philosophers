@@ -25,6 +25,9 @@ impl Philosopher {
     }
 
     fn eat(&self) {
+        // Solve the deadlock problem by acquiring the forks in a order 
+        // that is odd philosophers pick up the left fork first and even 
+        // philosophers pick up the right fork first.
         if self.id % 2 == 0 {
             let _right = self.right_fork.lock().unwrap();
             self.send_message(format!("{} has picked up the right fork", &self.name));
@@ -73,13 +76,11 @@ fn main() {
     // Make them think and eat
     for philosopher in philosophers {
         let tx = philosopher.thoughts.clone();
-        thread::spawn(move || {
-            loop {
-                philosopher.think();
-                philosopher.eat();
-                tx.send(format!("{} is done eating!", &philosopher.name))
-                    .unwrap();
-            }
+        thread::spawn(move || loop {
+            philosopher.think();
+            philosopher.eat();
+            tx.send(format!("{} is done eating!", &philosopher.name))
+                .unwrap();
         });
     }
 
