@@ -1,8 +1,7 @@
 # Dining Philosophers
 
-[![Build Status](https://travis-ci.org/nsr888/dining-philosophers.svg?branch=main)](https://travis-ci.org/nsr888/dining-philosophers)
-
-The classic concurrency problem, in Rust.
+The classic concurrency problem, in Rust.  
+An exercise from [Comprehensive Rust 🦀](https://google.github.io/comprehensive-rust/exercises/day-4/dining-philosophers.html).
 
 ## Trying it out
 
